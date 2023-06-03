@@ -207,6 +207,10 @@ console.log(keysOfProps); // ['id', 'name', 'age']
 ```
 
 
+# impact on performance
+
+On the tested hardware, for 40 files with 1600 lines of ts code (i.e. 64 thousand lines of code, respectively), and 5 corresponding constructs for transformation in each file, the difference in compilation speed did not exceed 10% (~1.550 sec vs ~1.700 sec )
+
 # License
 
 MIT
