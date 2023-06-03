@@ -6,14 +6,14 @@
       "noEmitOnError": true,
       "suppressImplicitAnyIndexErrors": true,
       "target": "ES5",
-      "typeRoots": [
-         "node_modules/ts-transformer-keys/sources/index.d.ts"
-      ]
+      // "typeRoots": [
+      //    "node_modules/ts-keys-compiler/sources/index.d.ts"
+      // ]
    },
    // "exclude": [
    //    "node_modules"
    // ],
    "include": [
-      "node_modules/ts-transformer-keys/sources/index.d.ts"
+      "node_modules/ts-keys-compiler/sources/index.d.ts"
    ],
 }

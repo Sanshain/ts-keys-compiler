@@ -4,13 +4,13 @@ specifiers:
   rollup: ^1.19.4
   rollup-plugin-node-resolve: ^5.2.0
   rollup-plugin-typescript2: ^0.22.1
-  ts-transformer-keys: github:Sanshain/ts-keys-compiler
+  ts-keys-compiler: github:Sanshain/ts-keys-compiler
 
 devDependencies:
   rollup: 1.32.1
   rollup-plugin-node-resolve: 5.2.0_rollup@1.32.1
   rollup-plugin-typescript2: 0.22.1_rollup@1.32.1
-  ts-transformer-keys: github.com/Sanshain/ts-keys-compiler/257184ea24e9670c8a7ebadd7cdf3f81e7a0b432
+  ts-keys-compiler: github.com/Sanshain/ts-keys-compiler/88f119c1255a25df27f876a8d72eda0645abfb9d
 
 packages:
 
@@ -539,10 +539,10 @@ packages:
     engines: {node: '>=6'}
     dev: true
 
-  github.com/Sanshain/ts-keys-compiler/257184ea24e9670c8a7ebadd7cdf3f81e7a0b432:
-    resolution: {tarball: https://codeload.github.com/Sanshain/ts-keys-compiler/tar.gz/257184ea24e9670c8a7ebadd7cdf3f81e7a0b432}
-    name: ts-transformer-keys
-    version: 0.4.4
+  github.com/Sanshain/ts-keys-compiler/88f119c1255a25df27f876a8d72eda0645abfb9d:
+    resolution: {tarball: https://codeload.github.com/Sanshain/ts-keys-compiler/tar.gz/88f119c1255a25df27f876a8d72eda0645abfb9d}
+    name: ts-keys-compiler
+    version: 0.4.5
     prepare: true
     requiresBuild: true
     peerDependencies:
