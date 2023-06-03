@@ -1,6 +1,6 @@
 {
   "name": "ts-keys-compiler",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "description": "A TypeScript custom transformer which enables to obtain keys of given type.",
   "main": "./sources/transform.js",
   "types": "./sources/index.d.ts",
@@ -14,22 +14,22 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kimamula/ts-transformer-keys.git"
+    "url": "git+https://github.com/Sanshain/ts-keys-compiler.git"
   },
   "keywords": [
     "TypeScript"
   ],
-  "author": "kimamula",
+  "author": "Sanshain",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/kimamula/ts-transformer-keys/issues"
+    "url": "https://github.com/Sanshain/ts-keys-compiler/issues"
   },
   "files": [
     "sources/index.d.ts",
     "sources/transformer.js",
     "sources/transformer.ts"
   ],
-  "homepage": "https://github.com/kimamula/ts-transformer-keys#readme",
+  "homepage": "https://github.com/Sanshain/ts-keys-compiler#readme",
   "devDependencies": {
     "@types/mocha": "^10.0.1",
     "@types/node": "^18.16.16",
