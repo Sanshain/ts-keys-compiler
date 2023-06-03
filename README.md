@@ -61,7 +61,11 @@ however, there are several limitations for security and transparency reasons. Th
 
 Properly using the package consists of the two following steps (both of them required!):
 
-- Installation: `npm i -D Sanshain/ts-keys-compiler`
+- Installation: 
+
+  ```
+  npm i -D Sanshain/ts-keys-compiler
+  ```
 - Tuning custom transformer which is used to compile the `keys` function correctly: look up point "**How to use the custom transformer**":
 
 
