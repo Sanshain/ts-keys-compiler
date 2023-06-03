@@ -1,4 +1,4 @@
-import { keys } from '../../index';
+import { keys } from '../../sources/index';
 
 keys();
 
