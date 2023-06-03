@@ -32,7 +32,7 @@ let keys = ["a", "b"]
 
 ## Constraints:
 
-however, there are several limitations for security and transparency reasons. The such `getOwnPropertyNames` method return `(keyof typeof obj)[]` instead of `string[]` and makes appropriate transformation only when the following rules are followed:
+There are several limitations for security and transparency reasons. The such `getOwnPropertyNames` method return `(keyof typeof obj)[]` instead of `string[]` and makes appropriate transformation only when the following rules are followed:
 - Generic type should be explicitly specified in the calling signature. It's kind of a way to choose exactly how to handle the construction during development: 
    ```ts
    let ae = { a: 1, b: 1 }
