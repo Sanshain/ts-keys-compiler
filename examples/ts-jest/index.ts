@@ -1,12 +1,11 @@
-import { keys } from 'ts-transformer-keys';
+
 interface Foo {
   foo: string;
 }
 
 export default class TestClass {
-  testMethod(){
-    keys();
-    const fooKeys = keys<Foo>();
+  testMethod(){    
+    const fooKeys = Object.getOwnPropertyNames<Foo>({foo: 1});
     return fooKeys
   }
 }

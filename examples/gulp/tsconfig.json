@@ -1,0 +1,20 @@
+{
+   "compilerOptions": {
+      "strict": true,
+      "module": "es2015",
+      "moduleResolution": "node",
+      "noEmitOnError": true,
+      // "suppressImplicitAnyIndexErrors": true,      
+      "target": "ES5",
+      // "typeRoots": [
+      //    "node_modules/ts-keys-compiler/sources/index.d.ts"
+      // ]
+   },
+   // "exclude": [
+   //    "node_modules"
+   // ],
+   "include": [
+      "../../sources/index.d.ts",
+      "src/**/*.ts"
+   ],
+}

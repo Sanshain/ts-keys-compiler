@@ -6,10 +6,15 @@
     "target": "ES5"
   },
   "files": [
-    "index.ts"
+    "index.ts",
+    "../../sources/index.d.ts"
   ],
   "exclude": [
     "node_modules"
+  ],
+  "include": [
+   "./index.ts",
+   "../../sources/index.d.ts"
   ],
   "types": [
     "node",
