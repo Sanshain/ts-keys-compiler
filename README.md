@@ -5,13 +5,28 @@ A TypeScript custom transformer which enables to obtain keys of given type.
 [![NPM version][npm-image]][npm-url]
 [![Downloads](https://img.shields.io/npm/dm/ts-transformer-keys.svg)](https://www.npmjs.com/package/ts-transformer-keys)
 
-# Requirement
+## Requirement
 TypeScript >= 2.4.1
 
 # Motivation
 
-Traditionally according to tslib `Object.keys` and `Object.getOwnPropertyNames` methods return `string[]` type instead of expected by the methods naming `(keyof obj)[]`. The reason why this is done this way is that the types of objects in the tc are covariant and may implicitly contain supersets of other types. And therefore, they can lead to the fact that in runtime when calling Object.keys we can get as a result keys that are not covered by ts types. For example consider [this one](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgPICMBWEFgMID2IAzmFAK64FTIDeAUMk8gPQBUbjzybyAShDDkoJZGAAWKEHAC2EYsgIwxk5BBDk5UOOgA2KUlFABzZAAcoBM9DDB5yOCAAmyORIJOFShyEVYcYAB0XMy8AAJmcNoyimj+uCpwYMgIRGBwoAoSKBZWNnYKji5u4h7EgcgAKuLACgiOyOgoDQTxyRJJyACeBOQpUBBJEC7UPmoAHrW2IKYAIgQImurJGNgJALIeELrIABSzqOsAlH5rQSFMbCzcFwDWEF3EADyVE5DOXm0AfLsEAFxVI4AgCCUG0XSe9x6ykqX2QADJkIYTABtAC6AG4LssjPIXm91J5TgEfv9ASCwXAISiod5KgAaKo0h50tFor4Y7g3AC+9HoqRIyWIBDkqwBtAcAI0MiaUE56ClmllnIQipl0GQ3OQAF46JLkABGAAMjIVyAATCaUgCAMxGzX8oikJEiiCrc3i-XS5WNNWyzU6l2irB8gXOmAEAhMXW7KHECngyEs5RgLrWbzC4OYc1fE7auEMbhh5IyOBmcUogDSyFAyFpKbTEAzrvdaPFEbJ3ug3K1uolcE9HYBxs1psHkYBls1vIuAyEIjrD3KpbMsYeOrhK+ZXTRgQ7R3oM47u1WAUCcd2mbdWHNRyOQA) that lead to runtime error while ts thinks that everything is fine. This package presents workaround the case thanks to the use of custom ts transformer
+Traditionally according to tslib `Object.keys` and `Object.getOwnPropertyNames` methods return `string[]` type instead of expected by the methods naming `(keyof obj)[]`. The reason why this is done this way is that the types of objects in the tc are covariant and may implicitly contain supersets of other types. And therefore, they can lead to the fact that in runtime when calling Object.keys we can get as a result keys that are not covered by ts types. For example consider [this one](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgPICMBWEFgMID2IAzmFAK64FTIDeAUMk8gPQBUbjzybyAShDDkoJZGAAWKEHAC2EYsgIwxk5BBDk5UOOgA2KUlFABzZAAcoBM9DDB5yOCAAmyORIJOFShyEVYcYAB0XMy8AAJmcNoyimj+uCpwYMgIRGBwoAoSKBZWNnYKji5u4h7EgcgAKuLACgiOyOgoDQTxyRJJyACeBOQpUBBJEC7UPmoAHrW2IKYAIgQImurJGNgJALIeELrIABSzqOsAlH5rQSFMbCzcFwDWEF3EADyVE5DOXm0AfLsEAFxVI4AgCCUG0XSe9x6ykqX2QADJkIYTABtAC6AG4LssjPIXm91J5TgEfv9ASCwXAISiod5KgAaKo0h50tFor4Y7g3AC+9HoqRIyWIBDkqwBtAcAI0MiaUE56ClmllnIQipl0GQ3OQAF46JLkABGAAMjIVyAATCaUgCAMxGzX8oikJEiiCrc3i-XS5WNNWyzU6l2irB8gXOmAEAhMXW7KHECngyEs5RgLrWbzC4OYc1fE7auEMbhh5IyOBmcUogDSyFAyFpKbTEAzrvdaPFEbJ3ug3K1uolcE9HYBxs1psHkYBls1vIuAyEIjrD3KpbMsYeOrhK+ZXTRgQ7R3oM47u1WAUCcd2mbdWHNRyOQA) that lead to runtime error while ts thinks that everything is fine. This package presents workaround the case thanks to the use of custom ts transformer based on `ts-transformer-keys`.
 
+# how does it work?
+
+This package contains function `keyTransform` for transformation `Object.getOwnPropertyNames<typeof o>(o)` expression to array of keys in result file and overriden type for `ObjectConstructor.getOwnPropertyNames` that returns `Array<keyof T>` for safe transformation cases, whenever possible, else - `string[]`. For example: 
+
+```ts
+let ae = { a: 1, b: 1 }
+let keys = Object.getOwnPropertyNames<typeof ae>(ae)
+```
+
+will be converted to
+
+```ts
+let ae = { a: 1, b: 1 }
+let keys = ["a", "b"]
+```
 
 # How to use this package
 
