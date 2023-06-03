@@ -16,7 +16,7 @@ const program = ts.createProgram(['./test/test/global.d.ts', './test/test/app.ts
 });
 
 const transformers = {
-  before: [keysTransform(program)],
+  before: [keysTransform(program, {methodName: 'keys'})],
   after: []
 };
 const { emitSkipped, diagnostics } = program.emit(undefined, undefined, undefined, false, transformers);
