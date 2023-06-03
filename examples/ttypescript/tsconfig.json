@@ -1,17 +1,25 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "noEmitOnError": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "ES5",
-    "plugins": [
-      { "transform": "ts-transformer-keys/transformer" }
-    ]
-  },
-  "files": [
-    "index.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+   "compilerOptions": {
+      "strict": true,
+      "module": "es2015",
+      "moduleResolution": "node",
+      "noEmitOnError": true,
+      "suppressImplicitAnyIndexErrors": true,
+      "target": "ES5",
+      "typeRoots": [
+         "node_modules/ts-keys-compiler/sources/index.d.ts"
+      ],
+      "plugins": [
+         {
+            "transform": "ts-keys-compiler/sources/transform"
+         }
+      ]
+   },
+   // "exclude": [
+   //    "node_modules"
+   // ],
+   "include": [
+      "node_modules/ts-keys-compiler/sources/index.d.ts",
+      "./index.ts"
+   ],
 }

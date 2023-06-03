@@ -1,6 +1,6 @@
 {
    "name": "ts-keys-compiler",
-   "version": "0.4.5",
+   "version": "0.4.6",
    "description": "A TypeScript custom transformer which enables to obtain keys of given type.",
    "main": "./sources/transform.js",
    "types": "./sources/index.d.ts",

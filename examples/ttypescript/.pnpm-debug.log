@@ -1,0 +1,57 @@
+{
+  "0 debug pnpm:scope": {
+    "selected": 1
+  },
+  "1 debug pnpm:package-manifest": {
+    "initial": {
+      "scripts": {
+        "start": "ttsc"
+      },
+      "devDependencies": {
+        "ttypescript": "^1.5.7"
+      }
+    },
+    "prefix": "F:\\typescript\\ts-transformer-keys\\examples\\ttypescript"
+  },
+  "2 debug pnpm:context": {
+    "currentLockfileExists": false,
+    "storeDir": "F:\\.pnpm-store\\v3",
+    "virtualStoreDir": "F:\\typescript\\ts-transformer-keys\\examples\\ttypescript\\node_modules\\.pnpm"
+  },
+  "3 debug pnpm:stage": {
+    "prefix": "F:\\typescript\\ts-transformer-keys\\examples\\ttypescript",
+    "stage": "resolution_started"
+  },
+  "4 debug pnpm:_dependency_resolved": {
+    "resolution": "registry.npmjs.org/ttypescript/1.5.15",
+    "wanted": {
+      "dependentId": ".",
+      "name": "ttypescript",
+      "rawSpec": "^1.5.7"
+    }
+  },
+  "5 debug pnpm:progress": {
+    "packageId": "registry.npmjs.org/ttypescript/1.5.15",
+    "requester": "F:\\typescript\\ts-transformer-keys\\examples\\ttypescript",
+    "status": "resolved"
+  },
+  "6 error pnpm": {
+    "code": "ERR_PNPM_FETCH_404",
+    "hint": "ts-keys-compiler is not in the npm registry, or you have no permission to fetch it.\n\nAn authorization header was used: Bearer npm_[hidden]",
+    "request": {
+      "authHeaderValue": "Bearer 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",
+      "url": "https://registry.npmjs.org/ts-keys-compiler"
+    },
+    "response": {
+      "size": 0
+    },
+    "pkgName": "ts-keys-compiler",
+    "pkgsStack": [],
+    "err": {
+      "name": "pnpm",
+      "message": "GET https://registry.npmjs.org/ts-keys-compiler: Not Found - 404",
+      "code": "ERR_PNPM_FETCH_404",
+      "stack": "pnpm: GET https://registry.npmjs.org/ts-keys-compiler: Not Found - 404\n    at RetryOperation._fn (C:\\Users\\User\\AppData\\Roaming\\npm\\node_modules\\pnpm\\dist\\pnpm.cjs:85455:19)\n    at processTicksAndRejections (node:internal/process/task_queues:96:5)"
+    }
+  }
+}

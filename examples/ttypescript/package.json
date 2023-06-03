@@ -3,7 +3,7 @@
     "start": "ttsc"
   },
   "devDependencies": {
-    "ts-transformer-keys": "^0.4.1",
+    "ts-keys-compiler": "github:Sanshain/ts-keys-compiler",
     "ttypescript": "^1.5.7"
   }
 }
