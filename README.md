@@ -81,8 +81,8 @@ Properly using the package consists of the three following steps (both of them r
 
 ## How to use the custom transformer
 
-Unfortunately, TypeScript itself does not currently provide any easy way to use custom transformers (See https://github.com/Microsoft/TypeScript/issues/14419).
-The followings are the example usage of the custom transformer.
+Unfortunately, TypeScript itself does not currently provide any way to use custom transformers by tsconfig.json (See https://github.com/Microsoft/TypeScript/issues/14419) and requires using itself API.
+The followings are the usage examples of the API with the transformer for the most common cases:
 
 ### webpack (with ts-loader or awesome-typescript-loader)
 
