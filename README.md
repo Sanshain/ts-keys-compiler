@@ -2,7 +2,6 @@
 A TypeScript custom transformer which enables to obtain keys of given type.
 
 ![Build Status](https://github.com/kimamula/ts-transformer-keys/workflows/test/badge.svg)
-[![NPM version][npm-image]][npm-url]
 [![Downloads](https://img.shields.io/npm/dm/ts-transformer-keys.svg)](https://www.npmjs.com/package/ts-transformer-keys)
 
 ## Requirement
