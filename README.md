@@ -12,7 +12,7 @@ TypeScript >= 2.4.1
 
 Traditionally according to tslib `Object.keys` and `Object.getOwnPropertyNames` methods return `string[]` type instead of expected by the methods naming `(keyof obj)[]`. The reason why this is done this way is that the types of objects in the tc are covariant and may implicitly contain supersets of other types. And therefore, they can lead to the fact that in runtime when calling Object.keys we can get as a result keys that are not covered by ts types. For example consider [this one](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgPICMBWEFgMID2IAzmFAK64FTIDeAUMk8gPQBUbjzybyAShDDkoJZGAAWKEHAC2EYsgIwxk5BBDk5UOOgA2KUlFABzZAAcoBM9DDB5yOCAAmyORIJOFShyEVYcYAB0XMy8AAJmcNoyimj+uCpwYMgIRGBwoAoSKBZWNnYKji5u4h7EgcgAKuLACgiOyOgoDQTxyRJJyACeBOQpUBBJEC7UPmoAHrW2IKYAIgQImurJGNgJALIeELrIABSzqOsAlH5rQSFMbCzcFwDWEF3EADyVE5DOXm0AfLsEAFxVI4AgCCUG0XSe9x6ykqX2QADJkIYTABtAC6AG4LssjPIXm91J5TgEfv9ASCwXAISiod5KgAaKo0h50tFor4Y7g3AC+9HoqRIyWIBDkqwBtAcAI0MiaUE56ClmllnIQipl0GQ3OQAF46JLkABGAAMjIVyAATCaUgCAMxGzX8oikJEiiCrc3i-XS5WNNWyzU6l2irB8gXOmAEAhMXW7KHECngyEs5RgLrWbzC4OYc1fE7auEMbhh5IyOBmcUogDSyFAyFpKbTEAzrvdaPFEbJ3ug3K1uolcE9HYBxs1psHkYBls1vIuAyEIjrD3KpbMsYeOrhK+ZXTRgQ7R3oM47u1WAUCcd2mbdWHNRyOQA) that lead to runtime error while ts thinks that everything is fine. This package presents workaround the case thanks to the use of custom ts transformer based on `ts-transformer-keys`.
 
-# how does it work?
+# How does it work?
 
 This package contains function `keyTransform` for transformation `Object.getOwnPropertyNames<typeof o>(o)` expression to array of keys in result file and overriden type for `ObjectConstructor.getOwnPropertyNames` that returns `Array<keyof T>` for safe transformation cases, whenever possible, else - `string[]`. For example: 
 
@@ -28,26 +28,43 @@ let ae = { a: 1, b: 1 }
 let keys = ["a", "b"]
 ```
 
+## Constraints:
+
+however, there are several limitations for security and transparency reasons. The such `getOwnPropertyNames` method return `(keyof typeof obj)[]` instead of `string[]` and makes appropriate transformation only when the following rules are followed:
+- Generic type should be explicitly specified in the calling signature. It's kind of a way to choose exactly how to handle the construction during development: 
+   ```ts
+   let ae = { a: 1, b: 1 }
+   let strs = Object.getOwnPropertyNames(ae)             // string[]
+   let keys = Object.getOwnPropertyNames<typeof ae>(ae)  // (keyof AE)[]
+   ```
+- The type should contains just required fields to avoid the discrepancy of the list of fields with the runtime:
+   
+   with optional fields:
+   ```ts   
+   type A = { a: 1, b?: 1 }
+   let ae: A = { a: 1, b: 1 }
+   let ks = Object.getOwnPropertyNames<A>(ae)            // string[]
+   ```
+   with required fields:
+   ```ts   
+   type A = { a: 1, b: 1 }
+   let ae: A = { a: 1, b: 1 }
+   let ks = Object.getOwnPropertyNames<A>(ae)            // (keyof AE)[]
+   ```   
+- The type should not be union for the same reason:
+   ```ts
+   type U = { a: 1 } | { a: 1, b: 1 }
+   let aa: U = { a: 1, b: 1 }
+   let k = Object.getOwnPropertyNames<U>(aa)             // string[]
+   ```
+
 # How to use this package
 
+Properly using the package consists of the two following steps (both of them required!):
 
-This package contains overriden type for `ObjectConstructor.getOwnPropertyNames` that returns `Array<keyof T>`
-One is `keys` which is used in TypeScript codes to obtain keys of given type, while the other is a TypeScript custom transformer which is used to compile the `keys` function correctly.
+- Installation: `npm i -D Sanshain/ts-keys-compiler`
+- Tuning custom transformer which is used to compile the `keys` function correctly: look up point "**How to use the custom transformer**":
 
-## How to use `keys`
-
-```ts
-import { keys } from 'ts-transformer-keys';
-
-interface Props {
-  id: string;
-  name: string;
-  age: number;
-}
-const keysOfProps = keys<Props>();
-
-console.log(keysOfProps); // ['id', 'name', 'age']
-```
 
 ## How to use the custom transformer
 
@@ -190,22 +207,10 @@ var keysOfProps = ["id", "name", "age"];
 console.log(keysOfProps); // ['id', 'name', 'age']
 ```
 
-# Note
-
-* The `keys` function can only be used as a call expression. Writing something like `keys.toString()` results in a runtime error.
-* `keys` does not work with a dynamic type parameter, i.e., `keys<T>()` in the following code is converted to an empty array(`[]`).
-
-```ts
-class MyClass<T extends object> {
-  keys() {
-    return keys<T>();
-  }
-}
-```
 
 # License
 
 MIT
 
 [npm-image]:https://img.shields.io/npm/v/ts-transformer-keys.svg?style=flat
-[npm-url]:https://npmjs.org/package/ts-transformer-keys
+
