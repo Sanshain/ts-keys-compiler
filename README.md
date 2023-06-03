@@ -69,7 +69,7 @@ Properly using the package consists of the three following steps (both of them r
   ```
   npm i -D Sanshain/ts-keys-compiler
   ```
-- addition of the package to the include section of tscofig.json (if `node_modules` didn't...):
+- Addition of the package to the include section of your `tscofig.json` (if `node_modules` didn't...):
    ```
     "include": [
       // ...
