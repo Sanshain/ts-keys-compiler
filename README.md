@@ -4,12 +4,13 @@ A TypeScript custom transformer which enables to obtain keys of given type.
 ![Build Status](https://github.com/kimamula/ts-transformer-keys/workflows/test/badge.svg)
 [![Downloads](https://img.shields.io/npm/dm/ts-transformer-keys.svg)](https://www.npmjs.com/package/ts-transformer-keys)
 
+
 ## Requirement
 TypeScript >= 2.4.1
 
 # Motivation
 
-Traditionally according to tslib `Object.keys` and `Object.getOwnPropertyNames` methods return `string[]` type instead of expected by the methods naming `(keyof obj)[]`. The reason why this is done this way is that the types of objects in the tc are covariant and may implicitly contain supersets of other types. And therefore, they can lead to the fact that in runtime when calling Object.keys we can get as a result keys that are not covered by ts types. For example consider [this one](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgPICMBWEFgMID2IAzmFAK64FTIDeAUMk8gPQBUbjzybyAShDDkoJZGAAWKEHAC2EYsgIwxk5BBDk5UOOgA2KUlFABzZAAcoBM9DDB5yOCAAmyORIJOFShyEVYcYAB0XMy8AAJmcNoyimj+uCpwYMgIRGBwoAoSKBZWNnYKji5u4h7EgcgAKuLACgiOyOgoDQTxyRJJyACeBOQpUBBJEC7UPmoAHrW2IKYAIgQImurJGNgJALIeELrIABSzqOsAlH5rQSFMbCzcFwDWEF3EADyVE5DOXm0AfLsEAFxVI4AgCCUG0XSe9x6ykqX2QADJkIYTABtAC6AG4LssjPIXm91J5TgEfv9ASCwXAISiod5KgAaKo0h50tFor4Y7g3AC+9HoqRIyWIBDkqwBtAcAI0MiaUE56ClmllnIQipl0GQ3OQAF46JLkABGAAMjIVyAATCaUgCAMxGzX8oikJEiiCrc3i-XS5WNNWyzU6l2irB8gXOmAEAhMXW7KHECngyEs5RgLrWbzC4OYc1fE7auEMbhh5IyOBmcUogDSyFAyFpKbTEAzrvdaPFEbJ3ug3K1uolcE9HYBxs1psHkYBls1vIuAyEIjrD3KpbMsYeOrhK+ZXTRgQ7R3oM47u1WAUCcd2mbdWHNRyOQA) that lead to runtime error while ts thinks that everything is fine. This package presents workaround the case thanks to the use of custom ts transformer based on `ts-transformer-keys`.
+Traditionally according to tslib `Object.keys` and `Object.getOwnPropertyNames` methods return `string[]` type instead of expected by the methods naming `(keyof obj)[]`. The reason why this is done this way is that the types of objects in the ts are covariant and may implicitly contain supersets of other types. And therefore, they can lead to the fact that in runtime when calling Object.keys we can get as a result keys that are not covered by ts types. For example consider [this one](https://www.typescriptlang.org/play?#code/JYOwLgpgTgZghgYwgAgPICMBWEFgMID2IAzmFAK64FTIDeAUMk8gPQBUbjzybyAShDDkoJZGAAWKEHAC2EYsgIwxk5BBDk5UOOgA2KUlFABzZAAcoBM9DDB5yOCAAmyORIJOFShyEVYcYAB0XMy8AAJmcNoyimj+uCpwYMgIRGBwoAoSKBZWNnYKji5u4h7EgcgAKuLACgiOyOgoDQTxyRJJyACeBOQpUBBJEC7UPmoAHrW2IKYAIgQImurJGNgJALIeELrIABSzqOsAlH5rQSFMbCzcFwDWEF3EADyVE5DOXm0AfLsEAFxVI4AgCCUG0XSe9x6ykqX2QADJkIYTABtAC6AG4LssjPIXm91J5TgEfv9ASCwXAISiod5KgAaKo0h50tFor4Y7g3AC+9HoqRIyWIBDkqwBtAcAI0MiaUE56ClmllnIQipl0GQ3OQAF46JLkABGAAMjIVyAATCaUgCAMxGzX8oikJEiiCrc3i-XS5WNNWyzU6l2irB8gXOmAEAhMXW7KHECngyEs5RgLrWbzC4OYc1fE7auEMbhh5IyOBmcUogDSyFAyFpKbTEAzrvdaPFEbJ3ug3K1uolcE9HYBxs1psHkYBls1vIuAyEIjrD3KpbMsYeOrhK+ZXTRgQ7R3oM47u1WAUCcd2mbdWHNRyOQA) that lead to runtime error while ts thinks that everything is fine. This package presents workaround the case thanks to the use of custom ts transformer based on `ts-transformer-keys`.
 
 # How does it work?
 
@@ -66,6 +67,13 @@ Properly using the package consists of the two following steps (both of them req
   ```
   npm i -D Sanshain/ts-keys-compiler
   ```
+- add the package to the include section of tscofig.json (if `node_modules` didn't...):
+   ```
+    "include": [
+      // ...
+      "node_modules/ts-keys-compiler"
+   ]
+   ```
 - Tuning custom transformer which is used to compile the `keys` function correctly: look up point "**How to use the custom transformer**":
 
 
@@ -211,9 +219,52 @@ console.log(keysOfProps); // ['id', 'name', 'age']
 ```
 
 
-# impact on performance
+## What about `Object.keys`?
 
-On the tested hardware, for 40 files with 1600 lines of ts code (i.e. 64 thousand lines of code, respectively), and 5 corresponding constructs for transformation in each file, the difference in compilation speed did not exceed 10% (~1.550 sec vs ~1.700 sec )
+This package by default is configurated to use `Object.getOwnPropertyNames` signature for keys transformation instead of `Object.keys`. **Why?**
+
+The difference among the methods is that `Object.keys`, unlike `Object.getOwnPropertyNames`, returns *only enumerated properties*. It is important to note that typescript itself cannot control the enumerability of properties, since javascript in runtime allows you to change it for those of them that do not have the `configurable: false` clause set (that is, all properties for which it is not explicitly set). Therefore ts cann't detect the p-roperty state. However, using these properties inside source ts code even outside the enumeration supposes that the fields will still be explicitly described in types, rather than not at all.
+
+#### When `Object.keys` more preferred?
+
+Despite the ways to make non-enumerable fields in runtime (via `object.create` or modification descriptor from `getPropertyDescriptor`), many developers prefer not to use this feature to make the code more obvious. 
+
+Therefore, for them there is no difference, except that the `keys` consists of a less number of letters. For such cases, it may be reasonably to use `keys` method for transformations and at all. 
+
+#### Using `keys` for transformataion requires the following steps:
+
+- specify path for `keys.d.ts` instead of `node_modules/ts-keys-compiler` at include option of your `tsconfig.json`:
+   
+   ```json
+   "include": [
+      "node_modules/ts-keys-compiler/sources/keys.d.ts"
+   ],   
+   ```
+- pass `keys` as methodName option to transform function: 
+   ```ts
+   keysTransform(program, {methodName: 'keys'})
+   ```
+
+
+## Impact on performance
+
+On the tested hardware, for 40 files with 1600 lines of ts code (i.e. 64 thousand lines of code, respectively), 
+and 5 corresponding constructs for transformation in each file, the difference in compilation speed did not exceed 10% (~1.550 sec vs ~1.700 sec).
+ But even if it has weight, you can use the transformer only for production mode like this:
+ 
+ ```js
+ typescript({
+   transformers: production ? [service => {
+      const program = service.getProgram()
+      return {
+         before: program ? [keysTransform(program)] : [],
+         after: []
+      }
+   }] : []
+})
+ ```
+
+
 
 # License
 
