@@ -12,14 +12,31 @@ const a: A = {
 }
 
 // let ks = keys<typeof a>()
-type U = { a: 1 } | A
+type U = { a: 1 } | {
+   a: 1,
+   b: 1
+}
+let aa: U = { a: 1, b: 1 }
+let k = Object.getOwnPropertyNames<U>(aa)
 type Any = any
-let ks = Object.getOwnPropertyNames<any>(a)
-let ae = { a: 1 }
-let ks1 = Object.getOwnPropertyNames<typeof ae>(ae)
+let ks = Object.getOwnPropertyNames(a)
+type AE = {a: 1, b?: 1}
+let ae: AE = { a: 1, b: 1 }
+let ks1 = Object.getOwnPropertyNames<AE>(ae)
 console.log(ks);
 
 
+{
+   type A = { a: 1, b?: 1 }
+   let ae: A = { a: 1, b: 1 }
+   let ks = Object.getOwnPropertyNames<A>(ae)
+}
+
+{
+   type AE = { a: 1, b: 1 }
+   let ae: AE = { a: 1, b: 1 }
+   let ks = Object.getOwnPropertyNames<AE>(ae)
+}
 
 
 

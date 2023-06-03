@@ -1,15 +1,14 @@
-import { keys } from 'ts-transformer-keys';
 
-keys();
 
-interface Foo {
-  foo: string;
+type U = { a: 1 } | {
+   a: 1,
+   b: 1
 }
-const fooKeys = keys<Foo>();
-console.log(fooKeys[0]);
-
-type FooBar = Foo & { bar: number; };
-console.log(keys<FooBar>()[1]);
-type FooBarOrBarBaz = FooBar | { bar: Function; baz: Date; };
-const fooBarOrBarBazKeys = keys<FooBarOrBarBaz>();
-fooBarOrBarBazKeys.forEach(key => console.log(key));
+let aa: U = { a: 1, b: 1 }
+let k = Object.getOwnPropertyNames<U>(aa)
+type Any = any
+let ks = Object.getOwnPropertyNames(a)
+type AE = { a: 1, b?: 1 }
+let ae: AE = { a: 1, b: 1 }
+let ks1 = Object.getOwnPropertyNames<AE>(ae)
+console.log(ks);

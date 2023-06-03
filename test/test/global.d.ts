@@ -17,11 +17,6 @@ interface ObjectConstructor {
       ? string[] extends Array<keyof T> ? string[] : Array<keyof T>
       : string[])
 
-   // keys<T extends object>(o: T): T extends Required<T>
-   //    ? string[] extends Array<keyof T> ? string[] : Array<keyof T>
-   //    : string[];
-
-   // entries<T extends object>(o: T): Array<[keyof T, T[keyof T]]>;
 }
 
 
