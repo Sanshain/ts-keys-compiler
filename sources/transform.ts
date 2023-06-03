@@ -17,7 +17,9 @@ const createStringLiteral = ts.factory ? ts.factory.createStringLiteral : ts.cre
 export default function keysTransform(program: ts.Program, options: Options = {verbose: true}): ts.TransformerFactory<ts.SourceFile> {
    globalOptions = options;
    methodName = options.methodName || methodName
-   return (context: ts.TransformationContext) => (file: ts.SourceFile) => visitNodeAndChildren(file, program, context);
+   return (context: ts.TransformationContext) => {
+      return (file: ts.SourceFile) => visitNodeAndChildren(file, program, context);
+   }
 }
 
 function visitNodeAndChildren(node: ts.SourceFile, program: ts.Program, context: ts.TransformationContext): ts.SourceFile;

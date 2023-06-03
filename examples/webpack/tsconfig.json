@@ -1,11 +1,21 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "noEmitOnError": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "target": "ES5"
-  },
-  "exclude": [
-    "node_modules"
-  ]
+   "compilerOptions": {
+      "strict": true,
+      "module": "es2015",
+      "noEmitOnError": true,
+      // "suppressImplicitAnyIndexErrors": true,
+      "target": "ES5",
+      "moduleResolution": "node",
+      "typeRoots": []
+      // "types": [
+      //    "../../test/test/global.d.ts"
+      // ]
+   },
+   "include": [
+      "./index.ts",
+      "../../test/test/global.d.ts",
+   ],
+   "exclude": [
+      "node_modules"
+   ]
 }

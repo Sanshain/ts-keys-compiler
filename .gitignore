@@ -3,5 +3,5 @@
 !test/fileTransformation/*.js
 !test/compile/index.js
 npm-debug.log*
-node_modules
+node_modules/
 benchmarks/test/
