@@ -62,7 +62,7 @@ There are several limitations for security and transparency reasons. The `getOwn
 
 # How to use this package
 
-Properly using the package consists of the two following steps (both of them required!):
+Properly using the package consists of the three following steps (both of them required!):
 
 - Installation: 
 
