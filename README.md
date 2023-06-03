@@ -16,7 +16,7 @@ The `ts-keys-compiler` package presents safe workaround thanks to use of custom 
 
 # How does it work?
 
-This package contains function `keyTransform` for transformation `Object.getOwnPropertyNames<typeof o>(o)` expression to array of keys in result file and overriden type for `ObjectConstructor.getOwnPropertyNames` that returns `Array<keyof T>` for safe transformation cases, whenever possible, else - `string[]`. For example: 
+The package contains function `keyTransform` for transformation `Object.getOwnPropertyNames<typeof o>(o)` expression to array of keys in result file and overriden type for `ObjectConstructor.getOwnPropertyNames` that returns `Array<keyof T>` for safe transformation cases, whenever possible, else - `string[]`. For example: 
 
 ```ts
 let ae = { a: 1, b: 1 }
