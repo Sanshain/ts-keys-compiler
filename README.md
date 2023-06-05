@@ -1,4 +1,4 @@
-# ts-keys-compiler
+# ts-keys-turn
 A TypeScript custom transformer which enables to obtain keys of given type.
 
 ![Build Status](https://github.com/kimamula/ts-transformer-keys/workflows/test/badge.svg)
@@ -67,8 +67,14 @@ Properly using the package consists of the three following steps (both of them r
 - Installation: 
 
   ```
-  npm i -D Sanshain/ts-keys-compiler
+  npm i -D Sanshain/ts-keys-turn
   ```
+  or
+  ```
+  npm i -D ts-keys-applier
+  ```
+  
+  
 - Addition of the package to the include section of your `tscofig.json` (if `node_modules` didn't...):
    ```
     "include": [
