@@ -241,6 +241,7 @@ Therefore, for them there is no difference, except that the `keys` consists of a
 
 #### Using `keys` for transformataion requires the following steps:
 
+- install the package `npm i -D ts-keys-applier`
 - specify path for `keys.d.ts` instead of `node_modules/ts-keys-compiler` at include option of your `tsconfig.json`:
    
    ```json
@@ -248,7 +249,7 @@ Therefore, for them there is no difference, except that the `keys` consists of a
       "node_modules/ts-keys-compiler/sources/keys.d.ts"
    ],   
    ```
-- pass `keys` as methodName option to transform function: 
+- pass `keys` as methodName option to transform function (look up [how to use the custom transformer](https://github.com/Sanshain/ts-keys-turn#how-to-use-the-custom-transformer) if missed): 
    ```ts
    keysTransform(program, {methodName: 'keys'})
    ```
