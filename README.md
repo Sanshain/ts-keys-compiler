@@ -1,4 +1,4 @@
-# ts-keys-turn
+## ts-keys-turn
 A TypeScript custom transformer which enables to obtain keys of given type.
 
 ![Build Status](https://github.com/kimamula/ts-transformer-keys/workflows/test/badge.svg)
