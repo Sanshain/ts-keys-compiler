@@ -79,7 +79,7 @@ Properly using the package consists of the three following steps (both of them r
    ```
     "include": [
       // ...
-      "node_modules/ts-keys-compiler"
+      "node_modules/ts-keys-applier"
    ]
    ```
 - Tuning custom transformer which is used to compile the `keys` function correctly: look up point "**How to use the custom transformer**":
