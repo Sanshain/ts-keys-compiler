@@ -34,7 +34,7 @@ ab = abc;
 var ks_2 = ["a", "b"];                                  
 ```
 
-instead of erroneous
+instead of erroneous:
 
 ```ts
 var ab = { a: 1, b: 1 };
