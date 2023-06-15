@@ -40,7 +40,7 @@ instead of:
 var ab = { a: 1, b: 1 };
 var abc = { a: 1, b: 1, c: 1 };
 ab = abc;
-let keys = Object.getOwnPropertyNames(ab)          // <- ['a', 'b', 'c'] <- missmatch with typescript type
+let keys = Object.getOwnPropertyNames(ab)           // <- ['a', 'b', 'c'] <- missmatch with typescript
 ```
 
 ## Constraints:
