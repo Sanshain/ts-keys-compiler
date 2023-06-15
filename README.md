@@ -25,7 +25,7 @@ ab = abc
 let ks = Object.getOwnPropertyNames<typeof ab>(ab)        // ("a" | "b")[]
 ```
 
-will be converted (in compile time) to 
+will be converted (in compile time) to:
 
 ```ts
 var ab = { a: 1, b: 1 };
@@ -34,7 +34,7 @@ ab = abc;
 var ks_2 = ["a", "b"];                                  
 ```
 
-instead of erroneous:
+instead of:
 
 ```ts
 var ab = { a: 1, b: 1 };
