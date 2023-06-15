@@ -23,7 +23,7 @@ let ae = { a: 1, b: 1 }
 let keys = Object.getOwnPropertyNames<typeof ae>(ae)
 ```
 
-will be converted to
+will be converted in compile time to
 
 ```ts
 let ae = { a: 1, b: 1 }
