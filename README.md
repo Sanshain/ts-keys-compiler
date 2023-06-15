@@ -22,7 +22,7 @@ The package contains function `keyTransform` for transformation `Object.getOwnPr
 let ab = { a: 1, b: 1 } as const
 let abc = { a: 1, b: 1, c: 1 } as const
 ab = abc
-let ks = Object.getOwnPropertyNames<typeof ab>(ab)      // ("a" | "b")[]
+let ks = Object.getOwnPropertyNames<typeof ab>(ab)   // ("a" | "b")[]
 ```
 
 will be converted (in compile time) to:
@@ -31,7 +31,7 @@ will be converted (in compile time) to:
 var ab = { a: 1, b: 1 };
 var abc = { a: 1, b: 1, c: 1 };
 ab = abc;
-var ks_2 = ["a", "b"];                           // ["a", "b"] is matches with type
+var ks_2 = ["a", "b"];                             // ["a", "b"] is matches with type
 ```
 
 instead of:
@@ -40,7 +40,7 @@ instead of:
 var ab = { a: 1, b: 1 };
 var abc = { a: 1, b: 1, c: 1 };
 ab = abc;
-let keys = Object.getOwnPropertyNames(ab)         // <- ['a', 'b', 'c'] <- missmatch with typescript type
+let keys = Object.getOwnPropertyNames(ab)           // <- ['a', 'b', 'c'] <- missmatch with typescript type
 ```
 
 ## Constraints:
