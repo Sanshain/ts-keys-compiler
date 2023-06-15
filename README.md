@@ -19,15 +19,28 @@ This package presents safe workaround.
 The package contains function `keyTransform` for transformation `Object.getOwnPropertyNames<typeof o>(o)` expression to array of keys in result file and overriden type for `ObjectConstructor.getOwnPropertyNames` that returns `Array<keyof T>` for safe transformation cases, whenever possible, else - `string[]`. For example: 
 
 ```ts
-let ae = { a: 1, b: 1 }
-let keys = Object.getOwnPropertyNames<typeof ae>(ae)
+let ab = { a: 1, b: 1 } as const
+let abc = { a: 1, b: 1, c: 1 } as const
+ab = abc
+let ks = Object.getOwnPropertyNames<typeof ab>(ab)        // ("a" | "b")[]
 ```
 
-will be converted in compile time to
+will be converted (in compile time) to 
 
 ```ts
-let ae = { a: 1, b: 1 }
-let keys = ["a", "b"]
+var ab = { a: 1, b: 1 };
+var abc = { a: 1, b: 1, c: 1 };
+ab = abc;
+var ks_2 = ["a", "b"];                                  
+```
+
+instead of 
+
+```ts
+var ab = { a: 1, b: 1 };
+var abc = { a: 1, b: 1, c: 1 };
+ab = abc;
+let keys = Object.getOwnPropertyNames(ab)                // ['a', 'b', 'c'] -> in runtime
 ```
 
 ## Constraints:
