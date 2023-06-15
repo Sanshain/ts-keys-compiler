@@ -71,7 +71,7 @@ Properly using the package consists of the three following steps (both of them r
   ```
   or
   ```
-  npm i -D ts-keys-applier
+  npm i -D ts-keys-turn
   ```
   
   
@@ -79,7 +79,7 @@ Properly using the package consists of the three following steps (both of them r
    ```
     "include": [
       // ...
-      "node_modules/ts-keys-applier"
+      "node_modules/ts-keys-turn"
    ]
    ```
 - Tuning custom transformer which is used to compile the `keys` function correctly: look up point "**How to use the custom transformer**":
@@ -241,7 +241,7 @@ Therefore, for them there is no difference, except that the `keys` consists of a
 
 #### Using `keys` for transformataion requires the following steps:
 
-- install the package `npm i -D ts-keys-applier`
+- install the package `npm i -D ts-keys-turn`
 - specify path for `keys.d.ts` instead of `node_modules/ts-keys-compiler` at include option of your `tsconfig.json`:
    
    ```json
