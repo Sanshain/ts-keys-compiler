@@ -31,8 +31,8 @@
       "resolveSourceMapLocations": [
          "${workspaceFolder}/",
          "!/node_modules/**"
-      ],      
-   },    
+      ],
+   },
     {
       "name": "ts-node-dev debug",
       "type": "node",
@@ -44,6 +44,17 @@
         "run-script",
         "dev"
       ]
-    }
+    },
+   {
+      "name": "mocha debug",
+      "type": "node",
+      "request": "launch",
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+         "run-script",
+         "dev-test"
+      ]
+   }
   ]
 }

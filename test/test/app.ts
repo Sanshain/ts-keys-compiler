@@ -17,25 +17,26 @@ type U = { a: 1 } | {
    b: 1
 }
 let aa: U = { a: 1, b: 1 }
-let k = Object.getOwnPropertyNames<U>(aa)
+let k = Object.getOwnPropertyNames<U>(aa)                   // union =>       false
 type Any = any
-let ks = Object.getOwnPropertyNames(a)
+let ks = Object.getOwnPropertyNames(a)                      // no generic =>  false
 type AE = {a: 1, b?: 1}
 let ae: AE = { a: 1, b: 1 }
-let ks1 = Object.getOwnPropertyNames<AE>(ae)
+let ks1 = Object.getOwnPropertyNames<AE>(ae)                // optional =>    false
 console.log(ks);
 
 
 {
    type A = { a: 1, b?: 1 }
    let ae: A = { a: 1, b: 1 }
-   let ks = Object.getOwnPropertyNames<A>(ae)
+   let ks = Object.getOwnPropertyNames<A>(ae)               // optional =>    false
 }
 
 {
-   type AE = { a: 1, b: 1 }
-   let ae: AE = { a: 1, b: 1 }
-   let ks = Object.getOwnPropertyNames<AE>(ae)
+   let ab = { a: 1, b: 1 } as const
+   let abc = { a: 1, b: 1, c: 1 } as const
+   ab = abc
+   let ks = Object.getOwnPropertyNames<typeof ab>(ab)        // true
 }
 
 
