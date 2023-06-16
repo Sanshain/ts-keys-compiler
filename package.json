@@ -1,9 +1,23 @@
 {
    "name": "ts-keys-turn",
-   "version": "0.4.9",
+   "version": "0.5.10",
    "description": "A TypeScript custom transformer which enables to obtain keys of given type.",
    "main": "./sources/transform.js",
    "types": "./sources/index.d.ts",
+   "browser": "./dist/transform.js",
+   "module": "./dist/transform.js",
+   "exports":{
+      ".": {
+         "types": "./sources/index.d.ts",
+         "default": "./dist/transform.js",
+         "import": "./dist/transform.js"
+      },
+      "./dist": {
+         "types": "./dist/transform.d.ts",
+         "default": "./dist/transform.js",
+         "import": "./dist/transform.js"
+      }
+   },
    "scripts": {
       "prepare": "tsc",
       "test": "node test/compile && mocha test",
@@ -21,16 +35,18 @@
       "types",
       "typescript-transformer"
    ],
+   "files": [
+      "sources/index.d.ts",
+      "dist/transform.js",
+      "dist/transform.d.ts",
+      "sources/transform.js",
+      "sources/transform.ts"
+   ],
    "author": "Sanshain",
    "license": "MIT",
    "bugs": {
       "url": "https://github.com/Sanshain/ts-keys-turn/issues"
    },
-   "files": [
-      "sources/index.d.ts",
-      "sources/transformer.js",
-      "sources/transformer.ts"
-   ],
    "homepage": "https://github.com/Sanshain/ts-keys-turn#readme",
    "devDependencies": {
       "@types/mocha": "^10.0.1",

@@ -18,7 +18,7 @@ interface ObjectConstructor {
     */
    keys<T>(o: T): T extends object ? string[] : undefined[];
 
-   keys<T extends object>(o: T): IsUnion<T> extends true ? string[] : (T extends Required<T>
+   keys<T extends object>(o: T): IsUnion$<T> extends true ? string[] : (T extends Required<T>
       ? string[] extends Array<keyof T> ? string[] : Array<keyof T>
       : string[])
 }

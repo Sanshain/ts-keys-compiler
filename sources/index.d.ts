@@ -5,10 +5,10 @@
 // }
 
 
-type UnionToIntersection<U> =
+type UnionToIntersection$<U> =
    (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
 
-type IsUnion<T> = [T] extends [UnionToIntersection<T>] ? false : true
+type IsUnion$<T> = [T] extends [UnionToIntersection$<T>] ? false : true
 
 
 interface ObjectConstructor {
@@ -19,7 +19,7 @@ interface ObjectConstructor {
    getOwnPropertyNames(o: object): string[];
    keys<T>(o: T): T extends object ? string[] : undefined[];
 
-   getOwnPropertyNames<T extends object>(o: T): IsUnion<T> extends true ? string[] : (T extends Required<T>
+   getOwnPropertyNames<T extends object>(o: T): IsUnion$<T> extends true ? string[] : (T extends Required<T>
       ? string[] extends Array<keyof T> ? string[] : Array<keyof T>
       : string[])
 }
