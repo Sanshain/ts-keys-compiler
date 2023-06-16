@@ -43,6 +43,10 @@ ab = abc;
 let keys = Object.getOwnPropertyNames(ab)           // <- ['a', 'b', 'c'] <- missmatch with typescript
 ```
 
+Look up example in [stackblitz](https://stackblitz.com/edit/stackblitz-starters-42g8sx?file=index.js) and [codesandbox](https://codesandbox.io/p/sandbox/immutable-wind-r4yj7z?file=%2Fpackage.json%3A24%2C30).
+
+
+
 ## Constraints:
 
 There are several limitations for security and transparency reasons. The `getOwnPropertyNames` method return `(keyof typeof obj)[]` instead of `string[]` and makes appropriate transformation only when the following rules are followed:
